@@ -17,7 +17,7 @@ export default class App extends React.Component {
 
     handleOriginAmountChange = () => {
     }
-    handleDestinationAmountChange = () => {
+    handleDestAmountChange = () => {
     }
     handleOriginCurrencyChange = (origin) => {
     }
@@ -31,8 +31,7 @@ export default class App extends React.Component {
         return <div>
 
             <ErrorMsg msg={this.state.errorMsg}/>
-            <label>Convert</label>&nbsp;
-
+            <CurrencyInput/>
 
             <FeesTable conversionRate={1}
                        destinationCurrency={"EUR"}
@@ -44,4 +43,29 @@ export default class App extends React.Component {
 
     }
 }
+
+const CurrencyInput = ({originAmount, destAmount, originCurrency, destCurrency}) => {
+
+    return <div>
+        <label>Convert</label>
+        <input type="number"
+               id="originAmount"
+               placeholder={0.0} onChange={(event) => console.log(event.target.value)}/>
+        <select onChange={(event) => console.log(event.target.value)}>
+            <option>USD</option>
+            <option>EUR</option>
+            <option>JPY</option>
+        </select>
+        <input type="number"
+               id="dstAmount"
+               placeholder={0.0} onChange={(event) => console.log(event.target.value)}/>
+        <select onChange={(event) => console.log(event.target.value)}>
+            <option>USD</option>
+            <option selected>EUR</option>
+            <option>JPY</option>
+        </select>
+    </div>
+
+
+};
 

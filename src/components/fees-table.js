@@ -8,11 +8,11 @@ const FeesTable = ({originCurrency, fee, total, conversionRate, destinationCurre
             <tbody>
             <tr>
                 <td>Conversion rate</td>
-                <td>1 {originCurrency} -> {conversionRate.toFixed(2)} {destinationCurrency}}</td>
+                <td>1 {originCurrency} -> {conversionRate.toFixed(2)} {destinationCurrency}</td>
             </tr>
             <tr>
                 <td>Fee</td>
-                <td>{fee.toFixed(2)} {originCurrency}}</td>
+                <td>{fee.toFixed(2)} {originCurrency}</td>
             </tr>
             <tr>
                 <td className="total-label">Total cost</td>
