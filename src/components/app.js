@@ -1,5 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
+import FeesTable from "./fees-table.js";
+import ErrorMsg from "./error-msg.js";
 
 export default class App extends React.Component {
 
@@ -30,6 +31,8 @@ export default class App extends React.Component {
         return <div>
 
             <ErrorMsg msg={this.state.errorMsg}/>
+            <label>Convert</label>&nbsp;
+
 
             <FeesTable conversionRate={1}
                        destinationCurrency={"EUR"}
@@ -42,36 +45,3 @@ export default class App extends React.Component {
     }
 }
 
-const ErrorMsg = ({msg}) => {
-    if (msg) return <div>{msg}</div>
-    return null;
-};
-
-const FeesTable = ({originCurrency, fee, total, conversionRate, destinationCurrency}) => {
-
-    return <div>
-        <table>
-            <tbody>
-            <tr>
-                <td>Conversion rate</td>
-                <td>1 {originCurrency} -> {conversionRate.toFixed(2)} {destinationCurrency}}</td>
-            </tr>
-            <tr>
-                <td>Fee</td>
-                <td>{fee.toFixed(2)} {originCurrency}}</td>
-            </tr>
-            <tr>
-                <td className="total-label">Total cost</td>
-                <td>{total.toFixed(2)} {originCurrency}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-};
-
-FeesTable.propTypes = {
-    conversionRate: PropTypes.number.isRequired,
-    originCurrency: PropTypes.string.isRequired,
-    total: PropTypes.number.isRequired,
-    destinationCurrency: PropTypes.string.isRequired
-};
