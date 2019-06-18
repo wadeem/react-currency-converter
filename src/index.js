@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/app.js";
+import SimpleConverter from "./components/simple-converter.js";
 
 const el = document.getElementById("root");
-ReactDOM.render(<App/>,el);
+ReactDOM.render(<SimpleConverter/>, el);
