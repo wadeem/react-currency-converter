@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import Header from "./header.js";
 
 export default class SimpleConverter extends React.Component {
 
@@ -68,48 +67,41 @@ export default class SimpleConverter extends React.Component {
         const options = this.getCurrenciesAsOption();
         // console.log(options)
 
-        return <div className="container">
+        return <div className="container input-group">
+            <select onChange={(event) => {
+                this.setState({fromCurr: event.target.value});
+                console.log("from", event.target.value);
+            }}
+                    value={this.state.fromCurr} className="form-control">
+                {options}
+            </select>
+            <div className="input-group-prepend">
+                <span className="input-group-text">Amount:</span>
+            </div>
+            <input type="number"
+                   id="fromAmount"
+                   className="form-control"
+                   placeholder={0.0}
+                   onChange={(event) => this.amountHandler(event)}
+                   value={this.state.amount}
+            />
 
-            <Header>{"Currency Exchange"}</Header>
+            <select onChange={(event) => {
+                this.setState({toCurr: event.target.value});
+                console.log("to", event.target.value)
+            }}
+                    value={this.state.toCurr}
+                    className="form-control"
+            >
+                {options}
+            </select>
+            <button onClick={() => this.getRate(this.calculate)}
+                    className="btn btn-primary btn-sm">Calculate
+            </button>
+            <div/>
             <div className="input-group">
-                <select onChange={(event) => {
-                    this.setState({fromCurr: event.target.value,total: null});
-                    console.log("from", event.target.value);
-                }}
-                        value={this.state.fromCurr} className="form-control">
-                    {options}
-                </select>
-                <div className="input-group-prepend">
-                    <span className="input-group-text">Amount:</span>
-                </div>
-                <input type="number"
-                       id="fromAmount"
-                       className="form-control"
-                       placeholder={0.0}
-                       onChange={(event) => this.amountHandler(event)}
-                       value={this.state.amount}
-                />
-                <select onChange={(event) => {
-                    this.setState({toCurr: event.target.value, total: null});
-                    console.log("to", event.target.value)
-                }}
-                        value={this.state.toCurr}
-                        className="form-control">
-                    {options}
-                </select>
-                <button onClick={() => this.getRate(this.calculate)}
-                        className="btn btn-primary btn-sm">Calculate
-                </button>
-                <div/>
-                <div className="input-group">
-                    {this.renderTotal()}
-                </div>
+                <h2>{this.state.total} {this.state.total !== undefined ? this.state.toCurr : null}</h2>
             </div>
         </div>
-    }
-
-    renderTotal = () => {
-        if(this.state.total)
-        return <h2>{this.state.total} {this.state.toCurr}</h2>
     }
 }
