@@ -103,10 +103,14 @@ export default class SimpleConverter extends React.Component {
                         className="btn btn-primary btn-sm">Calculate
                 </button>
                 <div/>
-                <div className="input-group">
-                    <h2>{this.state.total} {this.state.total !== undefined ? this.state.toCurr : null}</h2>
-                </div>
+                {this.renderTotal()}
             </div>
+        </div>
+    }
+
+    renderTotal = () => {
+        if (this.state.total) return <div className="input-group total-container">
+            <h2>Total: {this.state.total} {this.state.toCurr}</h2>
         </div>
     }
 }
