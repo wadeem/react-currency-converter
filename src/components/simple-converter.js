@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Header from "./header.js";
-
+import Footer from "./footer.js";
 
 export default class SimpleConverter extends React.Component {
 
@@ -103,6 +103,7 @@ export default class SimpleConverter extends React.Component {
                 <div/>
                 {this.renderTotal()}
             </div>
+            <Footer>This is a footer</Footer>
         </div>
     }
 
