@@ -73,8 +73,7 @@ export default class SimpleConverter extends React.Component {
             <Header>Currency Exchange</Header>
             <div className="input-group converter">
                 <select onChange={(event) => {
-                    this.setState({fromCurr: event.target.value});
-                    console.log("from", event.target.value);
+                    this.setState({fromCurr: event.target.value, total: null})
                 }}
                         value={this.state.fromCurr} className="form-control">
                     {options}
@@ -91,8 +90,7 @@ export default class SimpleConverter extends React.Component {
                 />
 
                 <select onChange={(event) => {
-                    this.setState({toCurr: event.target.value});
-                    console.log("to", event.target.value)
+                    this.setState({toCurr: event.target.value, total: null});
                 }}
                         value={this.state.toCurr}
                         className="form-control"
