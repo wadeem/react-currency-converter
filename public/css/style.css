@@ -9,6 +9,30 @@
     max-width: 70%
 }
 
+.container {
+    text-align:center;
+    align-items: center;
+}
+
 .total-container {
     margin-top: 1em;
+}
+
+.selector {
+    max-width: 5em;
+}
+
+.amount-input {
+    max-width: 14em;
+}
+
+.to-curr {
+    background: #f7ffce;
+}
+
+.footer-text {
+    bottom: 2em;
+    font-size: 0.85em;
+    position: fixed;
+    width: 50%;
 }

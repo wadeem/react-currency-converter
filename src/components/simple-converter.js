@@ -49,19 +49,19 @@ export default class SimpleConverter extends React.Component {
     };
 
     amountHandler = (event = 0) => {
-        const amount = event.target.value;
-        this.setState(() => {
-            console.log(amount);
-            return {
-                amount: amount
-            }
-        })
+        this.setState({amount: event.target.value});
     };
 
     getCurrenciesAsOption = () => {
         return this.state.currencies.map(currency => {
-            return <option key={currency}>{currency}</option>
+            return <option key={currency} className="to-curr">{currency}</option>
         });
+    };
+
+    renderTotal = () => {
+        if (this.state.total) return <div className="input-group total-container">
+            <h2>Total: {this.state.total} {this.state.toCurr}</h2>
+        </div>
     };
 
     render() {
@@ -75,7 +75,8 @@ export default class SimpleConverter extends React.Component {
                 <select onChange={(event) => {
                     this.setState({fromCurr: event.target.value, total: null})
                 }}
-                        value={this.state.fromCurr} className="form-control">
+                        value={this.state.fromCurr}
+                        className="form-control selector">
                     {options}
                 </select>
                 <div className="input-group-prepend">
@@ -83,7 +84,7 @@ export default class SimpleConverter extends React.Component {
                 </div>
                 <input type="number"
                        id="fromAmount"
-                       className="form-control"
+                       className="form-control amount-input"
                        placeholder={0.0}
                        onChange={(event) => this.amountHandler(event)}
                        value={this.state.amount}
@@ -93,7 +94,7 @@ export default class SimpleConverter extends React.Component {
                     this.setState({toCurr: event.target.value, total: null});
                 }}
                         value={this.state.toCurr}
-                        className="form-control"
+                        className="form-control selector"
                 >
                     {options}
                 </select>
@@ -103,13 +104,9 @@ export default class SimpleConverter extends React.Component {
                 <div/>
                 {this.renderTotal()}
             </div>
-            <Footer>This is a footer</Footer>
+            <Footer>Current exchange rate is based upon foreign currency exchange
+                rate of European Central Bank</Footer>
         </div>
-    }
 
-    renderTotal = () => {
-        if (this.state.total) return <div className="input-group total-container">
-            <h2>Total: {this.state.total} {this.state.toCurr}</h2>
-        </div>
     }
 }
