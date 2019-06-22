@@ -19,9 +19,9 @@ export const UPDATE_TO_CURRENCY = toCurr => {
     };
 };
 
-export const UPDATE_FROM_AMOUNT = amount => {
+export const UPDATE_AMOUNT = amount => {
     return {
-        type: UPDATE_FROM_AMOUNT,
+        type: UPDATE_AMOUNT,
         amount
     };
 };
