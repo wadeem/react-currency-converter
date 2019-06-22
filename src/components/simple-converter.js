@@ -68,7 +68,7 @@ export default class SimpleConverter extends React.Component {
 
         return <div className="container">
             <Header>Currency Exchange</Header>
-            <div className="input-group converter">
+            <div className="input-group converter d-flex justify-content-center">
                 <select onChange={(event) => {
                     this.setState({fromCurr: event.target.value, total: null})
                 }}
