@@ -20,20 +20,19 @@ export default class SimpleConverter extends React.Component {
             .then((result) => {
                 const list = Object.keys(result.data.rates);
                 const currencies = [...list, result.data.base];
-                console.log("curr", currencies);
                 this.setState({currencies: currencies})
             })
             .catch((e) => console.error(e));
     }
 
-    calculate = (r) => {
+    calculate = (rates) => {
         let from = 1, to = 1, total;
 
-        Object.keys(r).map(k => {
-            if (k === this.state.fromCurr) {
-                from = r[k];
-            } else if (k === this.state.toCurr) {
-                to = r[k];
+        Object.keys(rates).map(key => {
+            if (key === this.state.fromCurr) {
+                from = rates[key];
+            } else if (key === this.state.toCurr) {
+                to = rates[key];
             }
         });
         total = this.state.amount / from * to;
@@ -65,9 +64,7 @@ export default class SimpleConverter extends React.Component {
     };
 
     render() {
-
         const options = this.getCurrenciesAsOption();
-        // console.log(options)
 
         return <div className="container">
             <Header>Currency Exchange</Header>
