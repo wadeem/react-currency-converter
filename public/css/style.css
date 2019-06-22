@@ -1,5 +1,5 @@
 .header {
-    text-align: center;
+
     margin-top: 1em;
     margin-bottom: 0.25em;
 }
@@ -10,7 +10,7 @@
 }
 
 .container {
-    text-align:center;
+    text-align: center;
     align-items: center;
 }
 
@@ -31,8 +31,6 @@
 }
 
 .footer-text {
-    bottom: 2em;
     font-size: 0.85em;
-    position: fixed;
-    width: 50%;
+    bottom: 1em;
 }
