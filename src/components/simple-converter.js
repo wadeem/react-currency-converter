@@ -58,7 +58,8 @@ export default class SimpleConverter extends React.Component {
     };
 
     renderTotal = () => {
-        if (this.state.total) return <div className="input-group total-container">
+        if (this.state.total) return <div className="input-group total-container
+        d-flex justify-content-center">
             <h2>Total: {this.state.total} {this.state.toCurr}</h2>
         </div>
     };
