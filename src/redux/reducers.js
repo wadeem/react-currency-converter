@@ -2,6 +2,8 @@ import {UPDATE_TOTAL, UPDATE_AMOUNT, UPDATE_FROM_CURRENCY, UPDATE_TO_CURRENCY} f
 
 export const reducer = (state, action) => {
 
+    if (state === undefined) state = {fromCurr: "EUR", toCurr: "USD", amount: 1.0}
+
     switch (action) {
 
         case UPDATE_TOTAL : {
