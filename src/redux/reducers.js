@@ -7,19 +7,19 @@ export const reducer = (state, action) => {
     switch (action) {
 
         case UPDATE_TOTAL : {
-            return {total: action.total};
+            return {...state, total: action.total};
         }
 
         case UPDATE_AMOUNT : {
-            return {amount: action.amount};
+            return {...state, amount: action.amount};
         }
 
         case UPDATE_FROM_CURRENCY : {
-            return {fromCurr: action.fromCurr};
+            return {...state, fromCurr: action.fromCurr};
         }
 
         case UPDATE_TO_CURRENCY: {
-            return {toCurr: action.toCurr};
+            return {...state, toCurr: action.toCurr};
         }
 
         default:
