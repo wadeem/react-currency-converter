@@ -1,10 +1,9 @@
-import {UPDATE_TOTAL, UPDATE_AMOUNT, UPDATE_FROM_CURRENCY, UPDATE_TO_CURRENCY} from "./actions.js";
+import {UPDATE_TOTAL, UPDATE_AMOUNT, UPDATE_FROM_CURR, UPDATE_TO_CURR} from "./action-constants.js";
 
 export const reducer = (state, action) => {
+    if (state === undefined) state = {fromCurr: "EUR", toCurr: "USD", amount: 1.0};
 
-    if (state === undefined) state = {fromCurr: "EUR", toCurr: "USD", amount: 1.0}
-
-    switch (action) {
+    switch (action.type) {
 
         case UPDATE_TOTAL : {
             return {...state, total: action.total};
@@ -14,16 +13,15 @@ export const reducer = (state, action) => {
             return {...state, amount: action.amount};
         }
 
-        case UPDATE_FROM_CURRENCY : {
-            return {...state, fromCurr: action.fromCurr};
+        case UPDATE_FROM_CURR : {
+            return {...state, fromCurr: action.fromCurr, total: null};
         }
 
-        case UPDATE_TO_CURRENCY: {
-            return {...state, toCurr: action.toCurr};
+        case UPDATE_TO_CURR: {
+            return {...state, toCurr: action.toCurr, total: null};
         }
 
         default:
             return state;
     }
-
 };
