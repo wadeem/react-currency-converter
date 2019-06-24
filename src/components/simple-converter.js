@@ -3,14 +3,13 @@ import axios from "axios";
 import {connect} from "react-redux";
 import Header from "./header.js";
 import Footer from "./footer.js";
+import {
+    UPDATE_AMOUNT, UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR
+} from "../redux/action-constants.js";
 
 class SimpleConverter extends React.Component {
 
     state = {
-        // amount: 1.0,
-        // fromCurr: "EUR",
-        // toCurr: "USD",
-        // total: undefined,
         currencies: []
     };
 
@@ -37,7 +36,7 @@ class SimpleConverter extends React.Component {
             }
         });
         total = this.props.amount / from * to;
-        this.setState({total: parseFloat(total).toFixed(2)})
+        this.props.updateTotal(parseFloat(total).toFixed(2));
     };
 
     getRate = (calculate) => {
@@ -49,7 +48,7 @@ class SimpleConverter extends React.Component {
     };
 
     amountHandler = (event = 0) => {
-        this.setState({amount: event.target.value});
+        this.props.updateAmount(event.target.value);
     };
 
     getCurrenciesAsOption = () => {
@@ -72,7 +71,7 @@ class SimpleConverter extends React.Component {
             <Header>Currency Exchange</Header>
             <div className="input-group converter d-flex justify-content-center">
                 <select onChange={(event) => {
-                    this.setState({fromCurr: event.target.value, total: null})
+                    this.props.updateFromCurr(event.target.value);
                 }}
                         value={this.props.fromCurr}
                         className="form-control selector">
@@ -90,11 +89,11 @@ class SimpleConverter extends React.Component {
                 />
 
                 <select onChange={(event) => {
-                    this.setState({toCurr: event.target.value, total: null});
+                    console.log(event.target.value);
+                    this.props.updateToCurr(event.target.value);
                 }}
                         value={this.props.toCurr}
-                        className="form-control selector"
-                >
+                        className="form-control selector">
                     {options}
                 </select>
                 <button onClick={() => this.getRate(this.calculate)}
@@ -106,7 +105,6 @@ class SimpleConverter extends React.Component {
             <Footer>Current exchange rate is based upon foreign currency exchange
                 rate of European Central Bank</Footer>
         </div>
-
     }
 }
 
@@ -119,4 +117,13 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(SimpleConverter);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateTotal: (total) => dispatch({type: UPDATE_TOTAL, total}),
+        updateAmount: (amount) => dispatch({type: UPDATE_AMOUNT, amount}),
+        updateFromCurr: (fromCurr) => dispatch({type: UPDATE_FROM_CURR, fromCurr}),
+        updateToCurr: (toCurr) => dispatch({type: UPDATE_TO_CURR, toCurr})
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleConverter);
