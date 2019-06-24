@@ -2,3 +2,4 @@ export const UPDATE_TOTAL = "UPDATE_TOTAL";
 export const UPDATE_FROM_CURR = "UPDATE_FROM_CURR";
 export const UPDATE_TO_CURR = "UPDATE_TO_CURR";
 export const UPDATE_AMOUNT = "UPDATE_AMOUNT";
+export const SET_CURRENCIES = "SET_CURRENCIES";

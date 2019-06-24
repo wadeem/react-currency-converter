@@ -4,14 +4,10 @@ import {connect} from "react-redux";
 import Header from "./header.js";
 import Footer from "./footer.js";
 import {
-    UPDATE_AMOUNT, UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR
+    UPDATE_AMOUNT, UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR, SET_CURRENCIES
 } from "../redux/action-constants.js";
 
 class SimpleConverter extends React.Component {
-
-    state = {
-        currencies: []
-    };
 
     url = "https://api.exchangeratesapi.io/latest";
 
@@ -20,7 +16,7 @@ class SimpleConverter extends React.Component {
             .then((result) => {
                 const list = Object.keys(result.data.rates);
                 const currencies = [...list, result.data.base];
-                this.setState({currencies: currencies})
+                this.props.setCurrencies(currencies)
             })
             .catch((e) => console.error(e));
     }
@@ -52,7 +48,8 @@ class SimpleConverter extends React.Component {
     };
 
     getCurrenciesAsOption = () => {
-        return this.state.currencies.map(currency => {
+        console.log(this.props.currencies)
+        return this.props.currencies.map(currency => {
             return <option key={currency} className="to-curr">{currency}</option>
         });
     };
@@ -113,7 +110,8 @@ const mapStateToProps = (state) => {
         total: state.total,
         toCurr: state.toCurr,
         fromCurr: state.fromCurr,
-        amount: state.amount
+        amount: state.amount,
+        currencies: state.currencies
     }
 };
 
@@ -122,7 +120,8 @@ const mapDispatchToProps = (dispatch) => {
         updateTotal: (total) => dispatch({type: UPDATE_TOTAL, total}),
         updateAmount: (amount) => dispatch({type: UPDATE_AMOUNT, amount}),
         updateFromCurr: (fromCurr) => dispatch({type: UPDATE_FROM_CURR, fromCurr}),
-        updateToCurr: (toCurr) => dispatch({type: UPDATE_TO_CURR, toCurr})
+        updateToCurr: (toCurr) => dispatch({type: UPDATE_TO_CURR, toCurr}),
+        setCurrencies: (currencies) => dispatch({type: SET_CURRENCIES, currencies})
     }
 };
 
