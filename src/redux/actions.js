@@ -1,25 +1,27 @@
-export const UPDATE_TOTAL = total => {
+import {UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR, UPDATE_AMOUNT} from "./action-constants.js";
+
+const upd_total = total => {
     return {
         type: UPDATE_TOTAL,
         total
     };
 };
 
-export const UPDATE_FROM_CURRENCY = fromCurr => {
+const upd_from_curr = fromCurr => {
     return {
-        type: UPDATE_FROM_CURRENCY,
+        type: UPDATE_FROM_CURR,
         fromCurr
     };
 };
 
-export const UPDATE_TO_CURRENCY = toCurr => {
+const upd_to_curr = toCurr => {
     return {
-        type: UPDATE_TO_CURRENCY,
+        type: UPDATE_TO_CURR,
         toCurr
     };
 };
 
-export const UPDATE_AMOUNT = amount => {
+const upd_amount = amount => {
     return {
         type: UPDATE_AMOUNT,
         amount
