@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
-import {connect} from "react-redux";
 import Header from "./header.js";
 import Footer from "./footer.js";
-import {
-    UPDATE_AMOUNT, UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR
-} from "../redux/action-constants.js";
 
-class SimpleConverter extends React.Component {
+export default class SimpleConverter extends React.Component {
 
     state = {
-        currencies: []
+        amount: 1.0,
+        fromCurr: "EUR",
+        toCurr: "USD",
+        currencies: [],
+        total: undefined,
     };
 
     url = "https://api.exchangeratesapi.io/latest";
@@ -29,14 +29,14 @@ class SimpleConverter extends React.Component {
         let from = 1, to = 1, total;
 
         Object.keys(rates).map(key => {
-            if (key === this.props.fromCurr) {
+            if (key === this.state.fromCurr) {
                 from = rates[key];
-            } else if (key === this.props.toCurr) {
+            } else if (key === this.state.toCurr) {
                 to = rates[key];
             }
         });
-        total = this.props.amount / from * to;
-        this.props.updateTotal(parseFloat(total).toFixed(2));
+        total = this.state.amount / from * to;
+        this.setState({total: parseFloat(total).toFixed(2)})
     };
 
     getRate = (calculate) => {
@@ -48,7 +48,7 @@ class SimpleConverter extends React.Component {
     };
 
     amountHandler = (event = 0) => {
-        this.props.updateAmount(event.target.value);
+        this.setState({amount: event.target.value});
     };
 
     getCurrenciesAsOption = () => {
@@ -58,9 +58,8 @@ class SimpleConverter extends React.Component {
     };
 
     renderTotal = () => {
-        if (this.props.total) return <div className="input-group total-container
-        d-flex justify-content-center">
-            <h2>Total: {this.props.total} {this.props.toCurr}</h2>
+        if (this.state.total) return <div className="input-group total-container">
+            <h2>Total: {this.state.total} {this.state.toCurr}</h2>
         </div>
     };
 
@@ -71,9 +70,9 @@ class SimpleConverter extends React.Component {
             <Header>Currency Exchange</Header>
             <div className="input-group converter d-flex justify-content-center">
                 <select onChange={(event) => {
-                    this.props.updateFromCurr(event.target.value);
+                    this.setState({fromCurr: event.target.value, total: null})
                 }}
-                        value={this.props.fromCurr}
+                        value={this.state.fromCurr}
                         className="form-control selector">
                     {options}
                 </select>
@@ -85,15 +84,15 @@ class SimpleConverter extends React.Component {
                        className="form-control amount-input"
                        placeholder={0.0}
                        onChange={(event) => this.amountHandler(event)}
-                       value={this.props.amount}
+                       value={this.state.amount}
                 />
 
                 <select onChange={(event) => {
-                    console.log(event.target.value);
-                    this.props.updateToCurr(event.target.value);
+                    this.setState({toCurr: event.target.value, total: null});
                 }}
-                        value={this.props.toCurr}
-                        className="form-control selector">
+                        value={this.state.toCurr}
+                        className="form-control selector"
+                >
                     {options}
                 </select>
                 <button onClick={() => this.getRate(this.calculate)}
@@ -105,25 +104,6 @@ class SimpleConverter extends React.Component {
             <Footer>Current exchange rate is based upon foreign currency exchange
                 rate of European Central Bank</Footer>
         </div>
+
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        total: state.total,
-        toCurr: state.toCurr,
-        fromCurr: state.fromCurr,
-        amount: state.amount
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateTotal: (total) => dispatch({type: UPDATE_TOTAL, total}),
-        updateAmount: (amount) => dispatch({type: UPDATE_AMOUNT, amount}),
-        updateFromCurr: (fromCurr) => dispatch({type: UPDATE_FROM_CURR, fromCurr}),
-        updateToCurr: (toCurr) => dispatch({type: UPDATE_TO_CURR, toCurr})
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SimpleConverter);
