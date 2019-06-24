@@ -48,7 +48,6 @@ class SimpleConverter extends React.Component {
     };
 
     getCurrenciesAsOption = () => {
-        console.log(this.props.currencies)
         return this.props.currencies.map(currency => {
             return <option key={currency} className="to-curr">{currency}</option>
         });
