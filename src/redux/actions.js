@@ -1,4 +1,5 @@
-import {UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR, UPDATE_AMOUNT} from "./action-constants.js";
+import {UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR, UPDATE_AMOUNT, SET_CURRENCIES}
+    from "./action-constants.js";
 
 const upd_total = total => {
     return {
@@ -25,5 +26,12 @@ const upd_amount = amount => {
     return {
         type: UPDATE_AMOUNT,
         amount
+    };
+};
+
+const set_currencies = currencies => {
+    return {
+        type: SET_CURRENCIES,
+        currencies
     };
 };

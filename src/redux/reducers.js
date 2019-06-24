@@ -26,9 +26,7 @@ export const reducer = (state, action) => {
         }
 
         case SET_CURRENCIES: {
-            return {
-                ...state, currencies: action.currencies
-            };
+            return {...state, currencies: action.currencies};
         }
 
         default:
