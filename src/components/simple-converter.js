@@ -3,9 +3,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import Header from "./header.js";
 import Footer from "./footer.js";
-import {
-    UPDATE_AMOUNT, UPDATE_TOTAL, UPDATE_FROM_CURR, UPDATE_TO_CURR, SET_CURRENCIES
-} from "../redux/action-constants.js";
+import {upd_total, upd_amount, set_currencies, upd_from_curr, upd_to_curr} from "../redux/actions.js";
 
 class SimpleConverter extends React.Component {
 
@@ -116,11 +114,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateTotal: (total) => dispatch({type: UPDATE_TOTAL, total}),
-        updateAmount: (amount) => dispatch({type: UPDATE_AMOUNT, amount}),
-        updateFromCurr: (fromCurr) => dispatch({type: UPDATE_FROM_CURR, fromCurr}),
-        updateToCurr: (toCurr) => dispatch({type: UPDATE_TO_CURR, toCurr}),
-        setCurrencies: (currencies) => dispatch({type: SET_CURRENCIES, currencies})
+        updateTotal: (total) => dispatch(upd_total(total)),
+        updateAmount: (amount) => dispatch(upd_amount(amount)),
+        updateFromCurr: (fromCurr) => dispatch(upd_from_curr(fromCurr)),
+        updateToCurr: (toCurr) => dispatch(upd_to_curr(toCurr)),
+        setCurrencies: (currencies) => dispatch(set_currencies(currencies))
     }
 };
 
