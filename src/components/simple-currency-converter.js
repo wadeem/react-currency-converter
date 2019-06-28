@@ -6,7 +6,7 @@ import Footer from "./footer.js";
 const SimpleCurrencyConverter = () => {
 
     return <View>
-        <Header>This is a header</Header>
+        <Header>Currency Converter</Header>
         <Text>Hello</Text>
         <Footer>This is a footer</Footer>
     </View>
