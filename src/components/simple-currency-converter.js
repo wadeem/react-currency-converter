@@ -1,16 +1,18 @@
 import React from "react";
-import {View, Text} from "react-native";
-import Header from "./header.js";
-import Footer from "./footer.js";
+import HeaderElement from "./header-element.js";
+import FooterElement from "./footer-element.js";
+import {footerText} from "./constants.js";
+import {Container, Content, Text} from "native-base";
 
 const SimpleCurrencyConverter = () => {
 
-    return <View>
-        <Header>Currency Converter</Header>
-        <Text>Hello</Text>
-        <Footer>This is a footer</Footer>
-    </View>
-
+    return <Container>
+        <HeaderElement>Currency Converter</HeaderElement>
+        <Content>
+            <Text>Hello React!</Text>
+        </Content>
+        <FooterElement>{footerText}</FooterElement>
+    </Container>
 };
 
 export default SimpleCurrencyConverter;
