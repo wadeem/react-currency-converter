@@ -19,7 +19,7 @@ const SimpleCurrencyConverter = () => {
                 <Col style={fromCol}></Col>
                 <Col style={toCol}></Col>
             </Row>
-            <Row size={2}>
+            <Row size={1}>
                 <Col style={amountCol}>
                     <Form>
                         <Item fixedLabel>
