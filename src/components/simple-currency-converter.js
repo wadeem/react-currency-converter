@@ -2,7 +2,7 @@ import React from "react";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText} from "./constants.js";
-import {Col, Container, Grid, Row} from "native-base";
+import {Button, Col, Container, Content, Form, Grid, Input, Item, Row, Text} from "native-base";
 
 const SimpleCurrencyConverter = () => {
 
@@ -20,8 +20,21 @@ const SimpleCurrencyConverter = () => {
                 <Col style={toCol}></Col>
             </Row>
             <Row size={2}>
-                <Col style={amountCol}></Col>
-                <Col style={buttonCol}></Col>
+                <Col style={amountCol}>
+                    <Form>
+                        <Item fixedLabel>
+                            <Input placeholder={"Amount"}
+                                   keyboardType='numeric'/>
+                        </Item>
+                    </Form>
+                </Col>
+                <Col style={buttonCol}>
+                    <Content>
+                        <Button full>
+                            <Text>Convert!</Text>
+                        </Button>
+                    </Content>
+                </Col>
             </Row>
             <Row size={1}>
                 <Col style={resultCol}></Col>
