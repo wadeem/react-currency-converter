@@ -20,5 +20,4 @@ const style = {
         textAlign: "center"
     },
     viewStyle: {}
-
 };
