@@ -36,6 +36,16 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+android
+ios
+
+.buckconfig
+.flowconfig
+.gitattributes
+.watchmanconfig
+babel.config.js
+metro.config.js
+yarn.lock
 # BUCK
 buck-out/
 \.buckd/
