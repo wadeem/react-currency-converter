@@ -4,7 +4,7 @@ import axios from "axios";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText, url} from "./constants.js";
-import {set_currencies} from "../redux/actions.js"
+import {set_currencies, upd_amount} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
 
 
@@ -52,7 +52,11 @@ class SimpleCurrencyConverter extends React.Component {
                     <Col style={amountCol}>
                         <Form>
                             <Item fixedLabel>
-                                <Input placeholder={"Amount"} keyboardType='numeric' onChange={e => console.log(e)}/>
+                                <Input placeholder={"Amount"} keyboardType='numeric'
+                                       onChangeText={
+                                           amount => this.props.updateAmount(amount)}
+                                       value={this.props.amount.toString()}
+                                />
                             </Item>
                         </Form>
                     </Col>
