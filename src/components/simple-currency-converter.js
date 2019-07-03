@@ -2,7 +2,10 @@ import React from "react";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText} from "./constants.js";
-import {Button, Col, Container, Content, Form, Grid, Input, Item, Row, Text} from "native-base";
+import {
+    Button, Col, Container, Content, Form, Grid, Input, Item, Row, Text
+    , Picker
+} from "native-base";
 
 const SimpleCurrencyConverter = () => {
 
@@ -16,10 +19,24 @@ const SimpleCurrencyConverter = () => {
         <Grid>
             <Row size={2} style={topRow}></Row>
             <Row size={1}>
-                <Col style={fromCol}></Col>
-                <Col style={toCol}></Col>
+                <Col style={fromCol}>
+                    <Form>
+                        <Picker mode={"dropdown"} placeholder={"FROM"}>
+                            <Picker.Item label="EUR" value="key0" />
+                            <Picker.Item label="USD" value="key1" />
+                        </Picker>
+                    </Form>
+                </Col>
+                <Col style={toCol}>
+                    <Form>
+                        <Picker placeholder={"TO"}>
+                            <Picker.Item label={"USD"} value={"key1"}/>
+                            <Picker.Item label={"EUR"} value={"key0"}/>
+                        </Picker>
+                    </Form>
+                </Col>
             </Row>
-            <Row size={2}>
+            <Row size={1}>
                 <Col style={amountCol}>
                     <Form>
                         <Item fixedLabel>
