@@ -20,11 +20,20 @@ class SimpleCurrencyConverter extends React.Component {
         }).catch(e => console.error(e))
     }
 
+    getCurrenciesAsPickerItems = () => {
+        return this.props.currencies.map(currency => {
+            return <Picker.Item label={currency} value={currency}/>
+        });
+    };
+
     render() {
         const {
             topRow, fromCol, toCol, amountCol,
             buttonCol, resultCol, bottomRow, currenciesRow
         } = styles;
+
+        let items = this.getCurrenciesAsPickerItems();
+        console.log(items);
 
         return <Container>
             <HeaderElement>Currency Converter</HeaderElement>
@@ -33,17 +42,16 @@ class SimpleCurrencyConverter extends React.Component {
                 <Row size={0.75} style={currenciesRow}>
                     <Col style={fromCol}>
                         <Form>
-                            <Picker mode={"dropdown"} placeholder={"FROM"} onValueChange={e => console.log(e)}>
-                                <Picker.Item label="EUR" value="key0"/>
-                                <Picker.Item label="USD" value="key1"/>
+                            <Picker mode={"dropdown"} placeholder={"FROM"}
+                                    onValueChange={e => console.log(e)}>
+                                {items}
                             </Picker>
                         </Form>
                     </Col>
                     <Col style={toCol}>
                         <Form>
                             <Picker placeholder={"TO"} onValueChange={e => console.log(e)}>
-                                <Picker.Item label={"USD"} value={"key1"}/>
-                                <Picker.Item label={"EUR"} value={"key0"}/>
+                                {items}
                             </Picker>
                         </Form>
                     </Col>
@@ -52,9 +60,8 @@ class SimpleCurrencyConverter extends React.Component {
                     <Col style={amountCol}>
                         <Form>
                             <Item fixedLabel>
-                                <Input placeholder={"Amount"} keyboardType='numeric'
-                                       onChangeText={
-                                           amount => this.props.updateAmount(amount)}
+                                <Input placeholder={"0.0"} keyboardType='numeric'
+                                       onChangeText={(amount = 0.0) => this.props.updateAmount(amount)}
                                        value={this.props.amount.toString()}
                                 />
                             </Item>
