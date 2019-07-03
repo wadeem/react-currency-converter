@@ -7,7 +7,6 @@ import reducer from "./redux/reducers.js";
 const store = createStore(reducer);
 
 const App = () => {
-    console.log(store)
     return <Provider store={store}>
         <SimpleCurrencyConverter/>
     </Provider>
