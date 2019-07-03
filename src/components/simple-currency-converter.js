@@ -1,15 +1,11 @@
 import React from "react";
-import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {connect} from "react-redux";
 import axios from "axios";
-import {reducer} from "../redux/reducers.js";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
-import {url, footerText} from "./constants.js";
-import {
-    Button, Col, Container, Content, Form, Grid, Input, Item, Row, Text
-    , Picker
-} from "native-base";
+import {footerText, url} from "./constants.js";
+import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
+
 
 class SimpleCurrencyConverter extends React.Component {
 
@@ -28,7 +24,7 @@ class SimpleCurrencyConverter extends React.Component {
             buttonCol, resultCol, bottomRow, currenciesRow
         } = styles;
 
-        return <Provider store={createStore(reducer)}><Container>
+        return <Container>
             <HeaderElement>Currency Converter</HeaderElement>
             <Grid>
                 <Row size={2} style={topRow}></Row>
@@ -72,7 +68,7 @@ class SimpleCurrencyConverter extends React.Component {
                 <Row size={2} style={bottomRow}></Row>
             </Grid>
             <FooterElement>{footerText}</FooterElement>
-        </Container></Provider>
+        </Container>
     }
 };
 
@@ -87,4 +83,4 @@ const styles = {
     bottomRow: {backgroundColor: "#06ffaf"}
 };
 
-export default SimpleCurrencyConverter;
+export default connect()(SimpleCurrencyConverter);
