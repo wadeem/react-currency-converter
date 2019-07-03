@@ -4,6 +4,7 @@ import axios from "axios";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText, url} from "./constants.js";
+import {set_currencies} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
 
 
@@ -14,7 +15,8 @@ class SimpleCurrencyConverter extends React.Component {
         axios.get(url).then(result => {
             const list = Object.keys(result.data.rates);
             const currencies = [...list, result.data.base];
-            console.log(list, currencies);
+            this.props.setCurrencies(currencies);
+            console.log(list, this.props.currencies);
         }).catch(e => console.error(e))
     }
 
@@ -56,7 +58,7 @@ class SimpleCurrencyConverter extends React.Component {
                     </Col>
                     <Col style={buttonCol}>
                         <Content>
-                            <Button full onPress={e => console.log(e)}>
+                            <Button full onPress={e => console.log("you pressed the button")}>
                                 <Text>Convert!</Text>
                             </Button>
                         </Content>
@@ -83,4 +85,25 @@ const styles = {
     bottomRow: {backgroundColor: "#06ffaf"}
 };
 
-export default connect()(SimpleCurrencyConverter);
+const mapStateToProps = (state) => {
+    return {
+        total: state.total,
+        toCurr: state.toCurr,
+        fromCurr: state.fromCurr,
+        amount: state.amount,
+        currencies: state.currencies
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateTotal: (total) => dispatch(upd_total(total)),
+        updateAmount: (amount) => dispatch(upd_amount(amount)),
+        updateFromCurr: (fromCurr) => dispatch(upd_from_curr(fromCurr)),
+        updateToCurr: (toCurr) => dispatch(upd_to_curr(toCurr)),
+        setCurrencies: (currencies) => dispatch(set_currencies(currencies))
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleCurrencyConverter);
