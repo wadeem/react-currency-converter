@@ -1,9 +1,6 @@
-import {
-    UPDATE_TOTAL, UPDATE_AMOUNT, UPDATE_FROM_CURR,
-    UPDATE_TO_CURR, SET_CURRENCIES
-} from "./action-constants.js";
+import {SET_CURRENCIES, UPDATE_AMOUNT, UPDATE_FROM_CURR, UPDATE_TO_CURR, UPDATE_TOTAL} from "./action-constants.js";
 
-export const reducer = (state, action) => {
+const reducer = (state, action) => {
     if (state === undefined) state =
         {fromCurr: "EUR", toCurr: "USD", amount: 1.0, currencies: []};
 
@@ -33,3 +30,5 @@ export const reducer = (state, action) => {
             return state;
     }
 };
+
+export default reducer;
