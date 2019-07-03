@@ -24,7 +24,7 @@ const SimpleCurrencyConverter = () => {
             <Row size={0.75} style={currenciesRow}>
                 <Col style={fromCol}>
                     <Form>
-                        <Picker mode={"dropdown"} placeholder={"FROM"}>
+                        <Picker mode={"dropdown"} placeholder={"FROM"} onValueChange={e => console.log(e)}>
                             <Picker.Item label="EUR" value="key0"/>
                             <Picker.Item label="USD" value="key1"/>
                         </Picker>
@@ -32,7 +32,7 @@ const SimpleCurrencyConverter = () => {
                 </Col>
                 <Col style={toCol}>
                     <Form>
-                        <Picker placeholder={"TO"}>
+                        <Picker placeholder={"TO"} onValueChange={e => console.log(e)}>
                             <Picker.Item label={"USD"} value={"key1"}/>
                             <Picker.Item label={"EUR"} value={"key0"}/>
                         </Picker>
@@ -43,13 +43,13 @@ const SimpleCurrencyConverter = () => {
                 <Col style={amountCol}>
                     <Form>
                         <Item fixedLabel>
-                            <Input placeholder={"Amount"} keyboardType='numeric'/>
+                            <Input placeholder={"Amount"} keyboardType='numeric' onChange={e => console.log(e)}/>
                         </Item>
                     </Form>
                 </Col>
                 <Col style={buttonCol}>
                     <Content>
-                        <Button full>
+                        <Button full onPress={e => console.log(e)}>
                             <Text>Convert!</Text>
                         </Button>
                     </Content>
