@@ -1,4 +1,7 @@
 import React from "react";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+import {reducer} from "../redux/reducers.js";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText} from "./constants.js";
@@ -14,7 +17,7 @@ const SimpleCurrencyConverter = () => {
         buttonCol, resultCol, bottomRow, currenciesRow
     } = styles;
 
-    return <Container>
+    return <Provider store={createStore(reducer)}><Container>
         <HeaderElement>Currency Converter</HeaderElement>
         <Grid>
             <Row size={2} style={topRow}></Row>
@@ -58,7 +61,7 @@ const SimpleCurrencyConverter = () => {
             <Row size={2} style={bottomRow}></Row>
         </Grid>
         <FooterElement>{footerText}</FooterElement>
-    </Container>
+    </Container></Provider>
 };
 
 const styles = {
