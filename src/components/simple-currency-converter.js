@@ -11,19 +11,19 @@ const SimpleCurrencyConverter = () => {
 
     const {
         topRow, fromCol, toCol, amountCol,
-        buttonCol, resultCol, bottomRow
+        buttonCol, resultCol, bottomRow, currenciesRow
     } = styles;
 
     return <Container>
         <HeaderElement>Currency Converter</HeaderElement>
         <Grid>
             <Row size={2} style={topRow}></Row>
-            <Row size={1}>
+            <Row size={0.75} style={currenciesRow}>
                 <Col style={fromCol}>
                     <Form>
                         <Picker mode={"dropdown"} placeholder={"FROM"}>
-                            <Picker.Item label="EUR" value="key0" />
-                            <Picker.Item label="USD" value="key1" />
+                            <Picker.Item label="EUR" value="key0"/>
+                            <Picker.Item label="USD" value="key1"/>
                         </Picker>
                     </Form>
                 </Col>
@@ -40,8 +40,7 @@ const SimpleCurrencyConverter = () => {
                 <Col style={amountCol}>
                     <Form>
                         <Item fixedLabel>
-                            <Input placeholder={"Amount"}
-                                   keyboardType='numeric'/>
+                            <Input placeholder={"Amount"} keyboardType='numeric'/>
                         </Item>
                     </Form>
                 </Col>
@@ -54,7 +53,7 @@ const SimpleCurrencyConverter = () => {
                 </Col>
             </Row>
             <Row size={1}>
-                <Col style={resultCol}></Col>
+                <Col style={resultCol}><Text>Result: </Text></Col>
             </Row>
             <Row size={2} style={bottomRow}></Row>
         </Grid>
@@ -64,6 +63,7 @@ const SimpleCurrencyConverter = () => {
 
 const styles = {
     topRow: {backgroundColor: "#06ffaf"},
+    currenciesRow: {paddingBottom: 10},
     fromCol: {backgroundColor: "#fff16c"},
     toCol: {backgroundColor: "#a4a2ff"},
     amountCol: {backgroundColor: "#ffffff"},
