@@ -22,7 +22,7 @@ class SimpleCurrencyConverter extends React.Component {
 
     getCurrenciesAsPickerItems = () => {
         return this.props.currencies.map(currency => {
-            return <Picker.Item label={currency} value={currency} key={currency}/>
+            return <Picker.Item label={currency} value={currency} key={currency} itemStyle={styles.picker}/>
         });
     };
 
@@ -52,7 +52,7 @@ class SimpleCurrencyConverter extends React.Component {
 
     renderTotal = () => {
         if (this.props.total) return <Text
-            style={styles.text.result}>Result: {this.props.total} {this.props.toCurr} </Text>
+            style={styles.result}>Result: {this.props.total} {this.props.toCurr} </Text>
     };
 
     render() {
@@ -74,7 +74,7 @@ class SimpleCurrencyConverter extends React.Component {
                             <Picker mode={"dropdown"} placeholder={"FROM"}
                                     onValueChange={curr => this.props.updateFromCurr(curr)}
                                     selectedValue={this.props.fromCurr}
-                                    style={styles.text.picker}>
+                                    itemStyle={styles.picker}>
                                 {items}
                             </Picker>
                         </Form>
@@ -84,6 +84,7 @@ class SimpleCurrencyConverter extends React.Component {
                             <Picker placeholder={"TO"}
                                     onValueChange={curr => this.props.updateToCurr(curr)}
                                     selectedValue={this.props.toCurr}
+                                    style={styles.picker}
                             >
                                 {items}
                             </Picker>
@@ -97,7 +98,7 @@ class SimpleCurrencyConverter extends React.Component {
                                 <Input placeholder={"0.0"} keyboardType='numeric'
                                        onChangeText={(amount = 0.0) => this.props.updateAmount(amount)}
                                        value={this.props.amount.toString()}
-                                       style={styles.text.amount}
+                                       style={styles.amount}
                                 />
                             </Item>
                         </Form>

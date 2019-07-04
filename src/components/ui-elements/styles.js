@@ -1,17 +1,30 @@
 const styles = {
-    topRow: {backgroundColor: "#06ffaf"},
+    topRow: {backgroundColor: "#424bd3"},
     currenciesRow: {paddingBottom: 0},
-    fromCol: {backgroundColor: "#fff16c"},
-    toCol: {backgroundColor: "#a4a2ff"},
-    amountCol: {backgroundColor: "#ffffff", marginLeft: -12},
-    buttonCol: {backgroundColor: "#ff6776", width: 120},
-    resultCol: {backgroundColor: "#db47ff", paddingTop: 10, paddingLeft: 10},
-    bottomRow: {backgroundColor: "#06ffaf"},
+    fromCol: {backgroundColor: "#fff"},
+    toCol: {backgroundColor: "#fff"},
+    amountCol: {backgroundColor: "#fff"},
+    buttonCol: {backgroundColor: "#fff", width: 120},
+    resultCol: {backgroundColor: "#424bd3"},
+    bottomRow: {backgroundColor: "#424bd3"},
     text: {
-        result: {fontSize: 25},
-        button: {fontSize: 17},
-        picker: {fontSize: 25},
-        amount: {fontSize: 22}
+        button: {fontSize: 18},
+    },
+    amount: {
+        fontSize: 30,
+        marginBottom: 10,
+        marginLeft:5
+    },
+    result: {
+        fontSize: 30,
+        backgroundColor: "#424bd3",
+        color: "#fff",
+        marginTop: 15,
+        marginLeft: 10,
+        marginBottom:20
+    },
+    picker: {
+        marginLeft: 50,
     }
 };
 
