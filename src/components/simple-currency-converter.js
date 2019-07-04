@@ -7,6 +7,7 @@ import {footerText, url} from "./constants.js";
 import {set_currencies, upd_amount, upd_from_curr, upd_to_curr, upd_total} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
 import styles from "./ui-elements/styles.js";
+import getRate from "./service.js";
 
 class SimpleCurrencyConverter extends React.Component {
 
@@ -26,29 +27,6 @@ class SimpleCurrencyConverter extends React.Component {
         });
     };
 
-    calculate = (rates) => {
-        let from = 1, to = 1, total;
-
-        Object.keys(rates).map(key => {
-            if (key === this.props.fromCurr) {
-                from = rates[key];
-            } else if (key === this.props.toCurr) {
-                to = rates[key];
-            }
-        });
-        total = this.props.amount / from * to;
-        this.props.updateTotal(parseFloat(total).toFixed(2));
-        console.log("total: ", this.props.total)
-    };
-
-    getRate = (calculate) => {
-        console.log("get rate");
-        const promise = axios.get(url).then(result => {
-            return result.data.rates;
-        }).catch(e => console.error(e));
-
-        promise.then((r) => calculate(r))
-    };
 
     renderTotal = () => {
         if (this.props.total) return <Text
@@ -105,7 +83,7 @@ class SimpleCurrencyConverter extends React.Component {
                     </Col>
                     <Col style={buttonCol}>
                         <Content>
-                            <Button full onPress={() => this.getRate(this.calculate)}>
+                            <Button full onPress={() => getRate(this.props)}>
                                 <Text style={styles.text.button}>Convert!</Text>
                             </Button>
                         </Content>
