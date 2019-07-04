@@ -51,7 +51,8 @@ class SimpleCurrencyConverter extends React.Component {
     };
 
     renderTotal = () => {
-        if (this.props.total) return <Text>Result: {this.props.total} {this.props.toCurr} </Text>
+        if (this.props.total) return <Text
+            style={styles.text.result}>Result: {this.props.total} {this.props.toCurr} </Text>
     };
 
     render() {
@@ -73,7 +74,7 @@ class SimpleCurrencyConverter extends React.Component {
                             <Picker mode={"dropdown"} placeholder={"FROM"}
                                     onValueChange={curr => this.props.updateFromCurr(curr)}
                                     selectedValue={this.props.fromCurr}
-                            >
+                                    style={styles.text.picker}>
                                 {items}
                             </Picker>
                         </Form>
@@ -96,6 +97,7 @@ class SimpleCurrencyConverter extends React.Component {
                                 <Input placeholder={"0.0"} keyboardType='numeric'
                                        onChangeText={(amount = 0.0) => this.props.updateAmount(amount)}
                                        value={this.props.amount.toString()}
+                                       style={styles.text.amount}
                                 />
                             </Item>
                         </Form>
@@ -103,7 +105,7 @@ class SimpleCurrencyConverter extends React.Component {
                     <Col style={buttonCol}>
                         <Content>
                             <Button full onPress={() => this.getRate(this.calculate)}>
-                                <Text>Convert!</Text>
+                                <Text style={styles.text.button}>Convert!</Text>
                             </Button>
                         </Content>
                     </Col>
@@ -120,13 +122,19 @@ class SimpleCurrencyConverter extends React.Component {
 
 const styles = {
     topRow: {backgroundColor: "#06ffaf"},
-    currenciesRow: {paddingBottom: 10},
+    currenciesRow: {paddingBottom: 0},
     fromCol: {backgroundColor: "#fff16c"},
     toCol: {backgroundColor: "#a4a2ff"},
-    amountCol: {backgroundColor: "#ffffff"},
+    amountCol: {backgroundColor: "#ffffff", marginLeft: -12},
     buttonCol: {backgroundColor: "#ff6776", width: 120},
-    resultCol: {backgroundColor: "#db47ff"},
-    bottomRow: {backgroundColor: "#06ffaf"}
+    resultCol: {backgroundColor: "#db47ff", paddingTop: 10, paddingLeft: 10},
+    bottomRow: {backgroundColor: "#06ffaf"},
+    text: {
+        result: {fontSize: 25},
+        button: {fontSize: 17},
+        picker: {fontSize: 25},
+        amount: {fontSize: 22}
+    }
 };
 
 const mapStateToProps = (state) => {
