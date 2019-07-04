@@ -3,9 +3,10 @@ import {url} from "./constants";
 
 const getRate = async (props) => {
     console.log("get rate");
-    const response = await axios.get(url);
-    const rates = await response.data.rates;
-    calculate(rates,props);
+    const response = await fetch(url);
+    const result = await response.json();
+    console.log(result.rates);
+    calculate(result.rates,props);
 };
 
 const calculate = (rates,props) => {

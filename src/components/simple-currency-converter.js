@@ -11,14 +11,14 @@ import getRate from "./service.js";
 
 class SimpleCurrencyConverter extends React.Component {
 
-    componentDidMount() {
+    async componentDidMount() {
         console.log("component did mount!");
-        axios.get(url).then(result => {
-            const list = Object.keys(result.data.rates);
-            const currencies = [...list, result.data.base];
-            this.props.setCurrencies(currencies);
-            console.log(list, this.props.currencies);
-        }).catch(e => console.error(e))
+        const response = await fetch(url);
+        const result = await response.json();
+        const list = Object.keys(result.rates);
+        const currencies = [...list, result.base];
+        this.props.setCurrencies(currencies);
+        console.log(list, this.props.currencies);
     }
 
     getCurrenciesAsPickerItems = () => {
@@ -97,7 +97,8 @@ class SimpleCurrencyConverter extends React.Component {
             <FooterElement>{footerText}</FooterElement>
         </Container>
     }
-};
+}
+;
 
 
 const mapStateToProps = (state) => {
