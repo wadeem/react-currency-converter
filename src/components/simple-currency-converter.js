@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import axios from "axios";
-import HeaderElement from "./header-element.js";
-import FooterElement from "./footer-element.js";
+import HeaderElement from "./ui-elements/header-element.js";
+import FooterElement from "./ui-elements/footer-element.js";
 import {footerText, url} from "./constants.js";
 import {set_currencies, upd_amount, upd_from_curr, upd_to_curr, upd_total} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
-
+import styles from "./ui-elements/styles.js";
 
 class SimpleCurrencyConverter extends React.Component {
 
@@ -120,22 +120,6 @@ class SimpleCurrencyConverter extends React.Component {
     }
 };
 
-const styles = {
-    topRow: {backgroundColor: "#06ffaf"},
-    currenciesRow: {paddingBottom: 0},
-    fromCol: {backgroundColor: "#fff16c"},
-    toCol: {backgroundColor: "#a4a2ff"},
-    amountCol: {backgroundColor: "#ffffff", marginLeft: -12},
-    buttonCol: {backgroundColor: "#ff6776", width: 120},
-    resultCol: {backgroundColor: "#db47ff", paddingTop: 10, paddingLeft: 10},
-    bottomRow: {backgroundColor: "#06ffaf"},
-    text: {
-        result: {fontSize: 25},
-        button: {fontSize: 17},
-        picker: {fontSize: 25},
-        amount: {fontSize: 22}
-    }
-};
 
 const mapStateToProps = (state) => {
     return {
