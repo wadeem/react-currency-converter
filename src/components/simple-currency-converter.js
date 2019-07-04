@@ -4,7 +4,7 @@ import axios from "axios";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText, url} from "./constants.js";
-import {set_currencies, upd_amount, upd_from_curr, upd_to_curr} from "../redux/actions.js"
+import {set_currencies, upd_amount, upd_from_curr, upd_to_curr, upd_total} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
 
 
@@ -22,8 +22,36 @@ class SimpleCurrencyConverter extends React.Component {
 
     getCurrenciesAsPickerItems = () => {
         return this.props.currencies.map(currency => {
-            return <Picker.Item label={currency} value={currency}/>
+            return <Picker.Item label={currency} value={currency} key={currency}/>
         });
+    };
+
+    calculate = (rates) => {
+        let from = 1, to = 1, total;
+
+        Object.keys(rates).map(key => {
+            if (key === this.props.fromCurr) {
+                from = rates[key];
+            } else if (key === this.props.toCurr) {
+                to = rates[key];
+            }
+        });
+        total = this.props.amount / from * to;
+        this.props.updateTotal(parseFloat(total).toFixed(2));
+        console.log("total: ", this.props.total)
+    };
+
+    getRate = (calculate) => {
+        console.log("get rate");
+        const promise = axios.get(url).then(result => {
+            return result.data.rates;
+        }).catch(e => console.error(e));
+
+        promise.then((r) => calculate(r))
+    };
+
+    renderTotal = () => {
+        if (this.props.total) return <Text>Result: {this.props.total} {this.props.toCurr} </Text>
     };
 
     render() {
@@ -74,14 +102,14 @@ class SimpleCurrencyConverter extends React.Component {
                     </Col>
                     <Col style={buttonCol}>
                         <Content>
-                            <Button full onPress={e => console.log("you pressed the button")}>
+                            <Button full onPress={() => this.getRate(this.calculate)}>
                                 <Text>Convert!</Text>
                             </Button>
                         </Content>
                     </Col>
                 </Row>
                 <Row size={1}>
-                    <Col style={resultCol}><Text>Result: </Text></Col>
+                    <Col style={resultCol}>{this.renderTotal()}</Col>
                 </Row>
                 <Row size={2} style={bottomRow}></Row>
             </Grid>
@@ -120,6 +148,5 @@ const mapDispatchToProps = (dispatch) => {
         setCurrencies: (currencies) => dispatch(set_currencies(currencies))
     }
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCurrencyConverter);
