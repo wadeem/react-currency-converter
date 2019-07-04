@@ -4,7 +4,7 @@ import axios from "axios";
 import HeaderElement from "./header-element.js";
 import FooterElement from "./footer-element.js";
 import {footerText, url} from "./constants.js";
-import {set_currencies, upd_amount} from "../redux/actions.js"
+import {set_currencies, upd_amount, upd_from_curr, upd_to_curr} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
 
 
@@ -43,14 +43,19 @@ class SimpleCurrencyConverter extends React.Component {
                     <Col style={fromCol}>
                         <Form>
                             <Picker mode={"dropdown"} placeholder={"FROM"}
-                                    onValueChange={e => console.log(e)}>
+                                    onValueChange={curr => this.props.updateFromCurr(curr)}
+                                    selectedValue={this.props.fromCurr}
+                            >
                                 {items}
                             </Picker>
                         </Form>
                     </Col>
                     <Col style={toCol}>
                         <Form>
-                            <Picker placeholder={"TO"} onValueChange={e => console.log(e)}>
+                            <Picker placeholder={"TO"}
+                                    onValueChange={curr => this.props.updateToCurr(curr)}
+                                    selectedValue={this.props.toCurr}
+                            >
                                 {items}
                             </Picker>
                         </Form>
