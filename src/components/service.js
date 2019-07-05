@@ -26,11 +26,10 @@ const getRate = async () => {
     if (response.status !== 200) throw Error(result.message);
 
     return result.rates;
-    // calculate(result.rates, props);
 };
 
 const calculate = (rates, props) => {
-    console.log("calculate")
+    console.log("calculate");
     let from = 1, to = 1, total;
     Object.keys(rates).map(key => {
         if (key === props.fromCurr) {
