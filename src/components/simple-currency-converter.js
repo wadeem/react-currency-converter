@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import axios from "axios";
+import {Alert} from "react-native";
 import HeaderElement from "./ui-elements/header-element.js";
 import FooterElement from "./ui-elements/footer-element.js";
 import {footerText, url} from "./constants.js";
@@ -11,14 +11,22 @@ import getRate from "./service.js";
 
 class SimpleCurrencyConverter extends React.Component {
 
-    async componentDidMount() {
+    componentDidMount() {
         console.log("component did mount!");
+        this.getListOfCurrencies(url)
+            .then(currencies => this.props.setCurrencies(currencies))
+            .catch(e => Alert.alert(e.message));
+        console.log(this.props.currencies);
+    }
+
+    async getListOfCurrencies(url) {
         const response = await fetch(url);
         const result = await response.json();
         const list = Object.keys(result.rates);
         const currencies = [...list, result.base];
-        this.props.setCurrencies(currencies);
-        console.log(list, this.props.currencies);
+
+        if (response.status !== 200) throw Error(result.message);
+        return currencies;
     }
 
     getCurrenciesAsPickerItems = () => {
