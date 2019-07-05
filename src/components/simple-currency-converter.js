@@ -7,27 +7,18 @@ import {footerText, url} from "./constants.js";
 import {set_currencies, upd_amount, upd_from_curr, upd_to_curr, upd_total} from "../redux/actions.js"
 import {Button, Col, Container, Content, Form, Grid, Input, Item, Picker, Row, Text} from "native-base";
 import styles from "./ui-elements/styles.js";
-import getRate from "./service.js";
+import {convert, getListOfCurrencies} from "./service.js";
 
 class SimpleCurrencyConverter extends React.Component {
 
     componentDidMount() {
         console.log("component did mount!");
-        this.getListOfCurrencies(url)
+        getListOfCurrencies(url)
             .then(currencies => this.props.setCurrencies(currencies))
             .catch(e => Alert.alert(e.message));
         console.log(this.props.currencies);
     }
 
-    async getListOfCurrencies(url) {
-        const response = await fetch(url);
-        const result = await response.json();
-        const list = Object.keys(result.rates);
-        const currencies = [...list, result.base];
-
-        if (response.status !== 200) throw Error(result.message);
-        return currencies;
-    }
 
     getCurrenciesAsPickerItems = () => {
         return this.props.currencies.map(currency => {
@@ -91,7 +82,7 @@ class SimpleCurrencyConverter extends React.Component {
                     </Col>
                     <Col style={buttonCol}>
                         <Content>
-                            <Button full onPress={() => getRate(this.props)}>
+                            <Button full onPress={() => convert(this.props)}>
                                 <Text style={styles.text.button}>Convert!</Text>
                             </Button>
                         </Content>
