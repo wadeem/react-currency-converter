@@ -22,7 +22,7 @@ const getRate = async () => {
     console.log("get rate");
     const response = await fetch(url);
     const result = await response.json();
-    console.log(result.rates);
+    // console.log(result.rates);
     if (response.status !== 200) throw Error(result.message);
 
     return result.rates;
@@ -34,8 +34,13 @@ const calculate = (rates, props) => {
     Object.keys(rates).map(key => {
         if (key === props.fromCurr) {
             from = rates[key];
+            console.log("key", key, "from", from)
         } else if (key === props.toCurr) {
             to = rates[key];
+            console.log("key", key, "to", to)
+        } else if (props.fromCurr === props.toCurr) {
+            from = 1;
+            to = 1;
         }
     });
     total = props.amount / from * to;
